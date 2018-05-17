@@ -12,13 +12,13 @@
 <meta name="keywords" content="Dockerfile,Rally,Tempest">
 <meta property="og:type" content="article">
 <meta property="og:title" content="基于 Dockerfile 构建 Rally 和 Tempest 容器镜像">
-<meta property="og:url" content="ananasyu.top/2018/05/16/Build-Rally-and-Tempest-based-on-Dockerfile/index.html">
+<meta property="og:url" content="ananasyu.top/2018/05/18/Build-Rally-and-Tempest-based-on-Dockerfile/index.html">
 <meta property="og:site_name" content="Ananas&#39;s Blog">
 <meta property="og:description" content="背景　　Rally 和 Tempest 作为 OpenStack 的两个测试框架，在测试 OpenStack 这个庞然大物中扮演着不可或缺的角色。作为 OpenStack 的项目之一，在使用过程中势必会调用部分 OpenStack 的运行库，这将有可能对整个环境造成污染，也不利于多云平台的复用及隔离。 　　Docker 的出现，无疑为我们提供了完美的解决方法。通过容器化将 Rally 以及 Tem">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://rally.readthedocs.io/en/stable/_images/Rally-Actions.png">
 <meta property="og:image" content="https://www.ibm.com/developerworks/cn/cloud/library/1403_liuyu_openstacktempest/image005.jpg">
-<meta property="og:updated_time" content="2018-05-17T06:36:59.400Z">
+<meta property="og:updated_time" content="2018-05-17T08:39:59.982Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="基于 Dockerfile 构建 Rally 和 Tempest 容器镜像">
 <meta name="twitter:description" content="背景　　Rally 和 Tempest 作为 OpenStack 的两个测试框架，在测试 OpenStack 这个庞然大物中扮演着不可或缺的角色。作为 OpenStack 的项目之一，在使用过程中势必会调用部分 OpenStack 的运行库，这将有可能对整个环境造成污染，也不利于多云平台的复用及隔离。 　　Docker 的出现，无疑为我们提供了完美的解决方法。通过容器化将 Rally 以及 Tem">
@@ -174,8 +174,8 @@
   
 
         
-          <a href="/2018/05/16/Build-Rally-and-Tempest-based-on-Dockerfile/" class="archive-article-date">
-  	<time datetime="2018-05-16T11:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-16</time>
+          <a href="/2018/05/18/Build-Rally-and-Tempest-based-on-Dockerfile/" class="archive-article-date">
+  	<time datetime="2018-05-18T11:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-18</time>
 </a>
         
         
@@ -183,7 +183,7 @@
   <span class="archive-article-date">
     <span class="post-time">
       <span class="post-meta-item-text">  字数统计: </span>
-      <span class="post-count">2,669字</span>
+      <span class="post-count">2,701字</span>
       &nbsp; | &nbsp;
       <span class="post-meta-item-text">  阅读时长: </span>
       <span class="post-count">11分</span>
@@ -191,11 +191,6 @@
   </span>
 </div>
 
-        
-        
-          <span class="archive-article-date">
-          阅读量 <span id="busuanzi_value_page_pv"></span>
-          </span>
         
         <br>
       </header>
@@ -254,7 +249,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">RUN mkdir -p /home/rally/data &amp;&amp; \</span><br><span class="line">    rally db recreate</span><br></pre></td></tr></table></figure>
 <h6 id="Step-8"><a href="#Step-8" class="headerlink" title="Step 8"></a>Step 8</h6><p>　　更改镜像工作目录，使得启动镜像后在 <code>/home/rally/</code> 目录执行命令等。命令参数 <code>WORKDIR &lt;dir&gt;</code> 。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">WORKDIR /home/rally</span><br></pre></td></tr></table></figure>
-<h6 id="Step-9"><a href="#Step-9" class="headerlink" title="Step 9"></a>Step 9</h6><p>　　为了令测试数据持久化，将镜像工作目录挂载到宿主机，启动容器的时候可通过 <code>-v</code> 指定挂载目录，便于数据的查看及持久化保存。命令参数 <code>VLOUME [&quot;&lt;dir&gt;&quot;]</code> 。</p>
+<h6 id="Step-9"><a href="#Step-9" class="headerlink" title="Step 9"></a>Step 9</h6><p>　　为了令测试数据持久化，将镜像数据存储文件夹挂载到宿主机，命令参数 <code>VLOUME [&quot;&lt;dir&gt;&quot;]</code> 。启动容器的时候会在 <code>/var/lib/docker/volumes/</code> 下创建一个随机命名的文件夹并挂载它，也可在启动时通过 <code>-v</code> 挂载到指定目录，便于数据的查看及持久化保存。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">VOLUME [<span class="string">"/home/rally"</span>]</span><br></pre></td></tr></table></figure>
 <h6 id="Step-10"><a href="#Step-10" class="headerlink" title="Step 10"></a>Step 10</h6><p>　　官方是以 <code>ENTRYPOINT [&quot;rally&quot;]</code> 作为容器启动时的默认命令。我们启动容器时指定的命令都将作为参数传给 <code>rally</code> 调用，不会被重写覆盖，这也导致我们无法进入容器内部去执行其他操作。因此摒弃 <code>ENTRYPOINT</code> 而用 <code>CMD</code> 命令，它允许我们启动时用别的命令覆盖，进行其他操作。两者的命令参数为 <code>ENTRYPOINT/CMD [&quot;executable&quot;, &quot;param1&quot;, &quot;param2&quot;]</code> 。一个Dockerfile文件仅允许一个<code>ENTRYPOINT</code> 和 <code>CMD</code> 存在，多次存在的话只有最后一次会生效。当两者同时存在的情况下，可以使用 <code>CMD</code> 给 <code>ENTRYPOINT</code> 传参。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CMD [<span class="string">"/bin/bash"</span>]</span><br></pre></td></tr></table></figure>
@@ -416,7 +411,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http:ananasyu.top/2018/05/16/Build-Rally-and-Tempest-based-on-Dockerfile/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http:ananasyu.top/2018/05/18/Build-Rally-and-Tempest-based-on-Dockerfile/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -469,14 +464,9 @@
     	<div class="footer-left">
     		&copy; 2018 Ananas
     	</div>
-        <span id="busuanzi_container_site_uv">
-          本站访客数<span id="busuanzi_value_site_uv"></span>人次
-        </span>
-        <span id="busuanzi_container_site_pv">
-          总访问量<span id="busuanzi_value_site_pv"></span>人次
-        </span>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+          <span> | Hosted by <a href="https://pages.coding.me" target="_blank" style="font-weight: bold">Coding Pages</a></span>
       	</div>
     </div>
   </div>
