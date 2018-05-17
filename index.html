@@ -5,13 +5,14 @@
   
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <link rel="dns-prefetch" href="PaulYuuu.github.io">
+  <link rel="dns-prefetch" href="ananasyu.top">
   <title>Ananas&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="记录所学所想~">
+<meta name="keywords" content="OpenStack,Docker">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Ananas&#39;s Blog">
-<meta property="og:url" content="PaulYuuu.github.io/index.html">
+<meta property="og:url" content="ananasyu.top/index.html">
 <meta property="og:site_name" content="Ananas&#39;s Blog">
 <meta property="og:description" content="记录所学所想~">
 <meta property="og:locale" content="default">
@@ -42,7 +43,7 @@
     <canvas id="anm-canvas" class="anm-canvas"></canvas>
     <div class="left-col" q-class="show:isShow">
       
-<div class="overlay" style="background: #14F5DF"></div>
+<div class="overlay" style="background: #81D8D0"></div>
 <div class="intrude-less">
 	<header id="header" class="inner">
 		<a href="/" class="profilepic">
@@ -60,9 +61,9 @@
 			
 				<li><a href="/">主页</a></li>
 	        
-				<li><a href="/archives/">时间轴</a></li>
+				<li><a href="/archives/">时光轴</a></li>
 	        
-				<li><a href="/photos/">相册时光</a></li>
+				<li><a href="/photos/">相册流年</a></li>
 	        
 			</ul>
 		</nav>
@@ -97,7 +98,7 @@
     <div class="mid-col" q-class="show:isShow,hide:isShow|isFalse">
       
 <nav id="mobile-nav">
-  	<div class="overlay js-overlay" style="background: #14F5DF"></div>
+  	<div class="overlay js-overlay" style="background: #81D8D0"></div>
 	<div class="btnctn js-mobile-btnctn">
   		<div class="slider-trigger list" q-on="click: openSlider(e)"><i class="icon icon-sort"></i></div>
 	</div>
@@ -140,9 +141,9 @@
 				
 					<li style="width: 33.333333333333336%"><a href="/">主页</a></li>
 		        
-					<li style="width: 33.333333333333336%"><a href="/archives/">时间轴</a></li>
+					<li style="width: 33.333333333333336%"><a href="/archives/">时光轴</a></li>
 		        
-					<li style="width: 33.333333333333336%"><a href="/photos/">相册时光</a></li>
+					<li style="width: 33.333333333333336%"><a href="/photos/">相册流年</a></li>
 		        
 				</ul>
 			</nav>
@@ -158,6 +159,116 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-Build-Rally-and-Tempest-based-on-Dockerfile" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/16/Build-Rally-and-Tempest-based-on-Dockerfile/">基于 Dockerfile 构建 Rally 和 Tempest 容器镜像</a>
+    </h1>
+  
+
+        
+          <a href="/2018/05/16/Build-Rally-and-Tempest-based-on-Dockerfile/" class="archive-article-date">
+  	<time datetime="2018-05-16T11:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-16</time>
+</a>
+        
+        
+          <div>
+  <span class="archive-article-date">
+    <span class="post-time">
+      <span class="post-meta-item-text">  字数统计: </span>
+      <span class="post-count">2,669字</span>
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-text">  阅读时长: </span>
+      <span class="post-count">11分</span>
+    </span>
+  </span>
+</div>
+
+        
+        
+        <br>
+      </header>
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a><strong>背景</strong></h2><p>　　<code>Rally</code> 和 <code>Tempest</code> 作为 OpenStack 的两个测试框架，在测试 OpenStack 这个庞然大物中扮演着不可或缺的角色。作为 OpenStack 的项目之一，在使用过程中势必会调用部分 OpenStack 的运行库，这将有可能对整个环境造成污染，也不利于多云平台的复用及隔离。</p>
+<p>　　Docker 的出现，无疑为我们提供了完美的解决方法。通过容器化将 Rally 以及 Tempest 制作成基础镜像，并与宿主机 OS 隔离，不仅可以减少主机资源占用而且也便于管理维护及平台间的移植。总的来说，使用 Dockerfile 构建 Rally 和 Tempest ，有着下面几个优点：</p>
+<ol>
+<li><font color="#008844"> 隔离主机资源：隔断容器与宿主机之间的文件交互，避免交叉感染； </font></li>
+<li><font color="#008844"> 轻量及统一化：容器比起虚拟机更加小巧，同时通过 Dockerfile 构建模板镜像可以使测试环境做到标准、统一化； </font></li>
+<li><font color="#008844"> 易扩展可复用：将构建需求分成多步 <font color="#FF0000"> Step </font> 写入文件中，使得以后的修改和扩展以及版本控制都变得极为便捷，而 Docker 的 <font color="#FF0000"> Libcontainer </font> 引擎也令跨平台复用变得易如反掌； </font></li>
+<li><font color="#008844"> 便捷性高效性：一次构建后，之后便可以使用该镜像快速分发，达到开箱即用的程度，而后续资源的管理和回收等都变得相当轻松可控。</font>
+
+</li>
+</ol>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Dockerfile</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Rally</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Tempest</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Docker//" class="article-tag-list-link color2">Docker</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/05/16/Build-Rally-and-Tempest-based-on-Dockerfile/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-Hello-Hexo" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -196,7 +307,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a><strong>背景</strong></h3><p>　　工作时间一长，慢慢的发现自己的脑子不好使了，接触的东西越来越多，忘的也越来越多。深思熟虑之后，希望以此博客，记录下自己生活中所见所闻以及将职业生涯中的技术理解保存下来，以便日后温习回顾。</p>
+        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a><strong>背景</strong></h2><p>　　工作时间一长，慢慢的发现自己的脑子不好使了，接触的东西越来越多，忘的也越来越多。深思熟虑之后，希望以此博客，记录下自己生活中所见所闻以及将职业生涯中的技术理解保存下来，以便日后温习回顾。</p>
 <div align="center"><br><img src="https://raw.githubusercontent.com/PaulYuuu/BligPicture/master/img/Hello-Hexo/2018-05-11_HelloHexo1.jpg" alt=""><br></div>
         
       
@@ -340,6 +451,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">essay</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Dockerfile</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Rally</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Tempest</a>
               </li>
             
             <div class="clearfix"></div>

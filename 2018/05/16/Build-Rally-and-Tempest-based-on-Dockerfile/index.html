@@ -6,19 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="ananasyu.top">
-  <title>Archives: 2018/5 | Ananas&#39;s Blog</title>
+  <title>基于 Dockerfile 构建 Rally 和 Tempest 容器镜像 | Ananas&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="记录所学所想~">
-<meta name="keywords" content="OpenStack,Docker">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Ananas&#39;s Blog">
-<meta property="og:url" content="ananasyu.top/archives/2018/05/index.html">
+  <meta name="description" content="背景　　Rally 和 Tempest 作为 OpenStack 的两个测试框架，在测试 OpenStack 这个庞然大物中扮演着不可或缺的角色。作为 OpenStack 的项目之一，在使用过程中势必会调用部分 OpenStack 的运行库，这将有可能对整个环境造成污染，也不利于多云平台的复用及隔离。 　　Docker 的出现，无疑为我们提供了完美的解决方法。通过容器化将 Rally 以及 Tem">
+<meta name="keywords" content="Dockerfile,Rally,Tempest">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于 Dockerfile 构建 Rally 和 Tempest 容器镜像">
+<meta property="og:url" content="ananasyu.top/2018/05/16/Build-Rally-and-Tempest-based-on-Dockerfile/index.html">
 <meta property="og:site_name" content="Ananas&#39;s Blog">
-<meta property="og:description" content="记录所学所想~">
+<meta property="og:description" content="背景　　Rally 和 Tempest 作为 OpenStack 的两个测试框架，在测试 OpenStack 这个庞然大物中扮演着不可或缺的角色。作为 OpenStack 的项目之一，在使用过程中势必会调用部分 OpenStack 的运行库，这将有可能对整个环境造成污染，也不利于多云平台的复用及隔离。 　　Docker 的出现，无疑为我们提供了完美的解决方法。通过容器化将 Rally 以及 Tem">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="https://rally.readthedocs.io/en/stable/_images/Rally-Actions.png">
+<meta property="og:image" content="https://www.ibm.com/developerworks/cn/cloud/library/1403_liuyu_openstacktempest/image005.jpg">
+<meta property="og:updated_time" content="2018-05-17T06:36:59.400Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Ananas&#39;s Blog">
-<meta name="twitter:description" content="记录所学所想~">
+<meta name="twitter:title" content="基于 Dockerfile 构建 Rally 和 Tempest 容器镜像">
+<meta name="twitter:description" content="背景　　Rally 和 Tempest 作为 OpenStack 的两个测试框架，在测试 OpenStack 这个庞然大物中扮演着不可或缺的角色。作为 OpenStack 的项目之一，在使用过程中势必会调用部分 OpenStack 的运行库，这将有可能对整个环境造成污染，也不利于多云平台的复用及隔离。 　　Docker 的出现，无疑为我们提供了完美的解决方法。通过容器化将 Rally 以及 Tem">
+<meta name="twitter:image" content="https://rally.readthedocs.io/en/stable/_images/Rally-Actions.png">
   
     <link rel="alternative" href="/atom.xml" title="Ananas&#39;s Blog" type="application/atom+xml">
   
@@ -158,36 +162,180 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-Build-Rally-and-Tempest-based-on-Dockerfile" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/05/16/Build-Rally-and-Tempest-based-on-Dockerfile/" class="archive-article-date">
-  	<time datetime="2018-05-16T11:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-16</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/16/Build-Rally-and-Tempest-based-on-Dockerfile/">基于 Dockerfile 构建 Rally 和 Tempest 容器镜像</a>
+    <h1 class="article-title" itemprop="name">
+      基于 Dockerfile 构建 Rally 和 Tempest 容器镜像
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+          <a href="/2018/05/16/Build-Rally-and-Tempest-based-on-Dockerfile/" class="archive-article-date">
+  	<time datetime="2018-05-16T11:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-16</time>
+</a>
+        
+        
+          <div>
+  <span class="archive-article-date">
+    <span class="post-time">
+      <span class="post-meta-item-text">  字数统计: </span>
+      <span class="post-count">2,669字</span>
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-text">  阅读时长: </span>
+      <span class="post-count">11分</span>
+    </span>
+  </span>
+</div>
+
+        
+        
+          <span class="archive-article-date">
+          阅读量 <span id="busuanzi_value_page_pv"></span>
+          </span>
+        
+        <br>
+      </header>
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a><strong>背景</strong></h2><p>　　<code>Rally</code> 和 <code>Tempest</code> 作为 OpenStack 的两个测试框架，在测试 OpenStack 这个庞然大物中扮演着不可或缺的角色。作为 OpenStack 的项目之一，在使用过程中势必会调用部分 OpenStack 的运行库，这将有可能对整个环境造成污染，也不利于多云平台的复用及隔离。</p>
+<p>　　Docker 的出现，无疑为我们提供了完美的解决方法。通过容器化将 Rally 以及 Tempest 制作成基础镜像，并与宿主机 OS 隔离，不仅可以减少主机资源占用而且也便于管理维护及平台间的移植。总的来说，使用 Dockerfile 构建 Rally 和 Tempest ，有着下面几个优点：</p>
+<ol>
+<li><font color="#008844"> 隔离主机资源：隔断容器与宿主机之间的文件交互，避免交叉感染； </font></li>
+<li><font color="#008844"> 轻量及统一化：容器比起虚拟机更加小巧，同时通过 Dockerfile 构建模板镜像可以使测试环境做到标准、统一化； </font></li>
+<li><font color="#008844"> 易扩展可复用：将构建需求分成多步 <font color="#FF0000"> Step </font> 写入文件中，使得以后的修改和扩展以及版本控制都变得极为便捷，而 Docker 的 <font color="#FF0000"> Libcontainer </font> 引擎也令跨平台复用变得易如反掌； </font></li>
+<li><font color="#008844"> 便捷性高效性：一次构建后，之后便可以使用该镜像快速分发，达到开箱即用的程度，而后续资源的管理和回收等都变得相当轻松可控。</font>
+
+</li>
+</ol>
+<a id="more"></a>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a><strong>正文</strong></h2><p>　　Dockerfile 作为镜像的描述文件，以简单的命令定义每一 Step 中镜像该做的事情，并将每一次步骤后的镜像 commit 为一个新镜像继续执行后续步骤。每增加一步 Step ，镜像会增加一个 layer 层，所以合理地设计及编写 Dockerfile 文件，避免镜像层次过于臃肿也是门需要思考的艺术。借此通过构建 Rally 以及 Tempest 的容器镜像，也顺便理解 Dockerfile 的文件结构及编写规范。</p>
+<h3 id="Rally"><a href="#Rally" class="headerlink" title="Rally"></a>Rally</h3><blockquote>
+<p>　　Rally 是一个基准测试工具，Rally 实现了自动化并统一了多个节点的 OpenStack 部署、云的验证、基准测试以及分析，以这种通用的方式去验证“ OpenStack 是如何大规模运作的？”这样的疑问，比如在数以千计的服务器下的高负载中是否正常工作。因此，可以将它作为 OpenStack CI/CD 系统的基本工具来使用，借以不断地改进 SLA（ Service-Level Agreement ）、性能和稳定性。</p>
+</blockquote>
+<div align="center" style="align:center"><br><font size="6">Rally 架构 </font><br><img src="https://rally.readthedocs.io/en/stable/_images/Rally-Actions.png" alt="Rally 架构" title="Rally架构"><br></div>
+
+<p>　　Rally 自己提供了 Docker 镜像存储在 <a href="https://hub.docker.com/r/xrally/xrally-openstack/" title="Rally官方Docker镜像" target="_blank" rel="noopener">Docker Hub</a> 上，也可以从 Github 上下载<a href="https://github.com/openstack/rally" title="Rally源码" target="_blank" rel="noopener"> Rally 源码</a>自己修改构建。接下来结合官方的 Dockerfile 文件，自定义修改属于我们自己的 Rally 镜像。</p>
+<h6 id="Step-1"><a href="#Step-1" class="headerlink" title="Step 1"></a>Step 1</h6><p>　　指定一个基础镜像进行构建。命令参数 <code>FROM &lt;image&gt;:&lt;tag&gt;</code> ，这里使用 ubuntu:16.04 作为 Rally 的基础镜像，它将作为镜像第一层完成后续步骤构建。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FROM ubuntu:16.04</span><br></pre></td></tr></table></figure>
+<h6 id="Step-2"><a href="#Step-2" class="headerlink" title="Step 2"></a>Step 2</h6><p>　　指定作者信息。命令参数 <code>MAINTAINER &lt;name&gt;</code> 。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MAINTAINER AnanasYuu &lt;yuyihuang0702@163.com&gt;</span><br></pre></td></tr></table></figure>
+<h6 id="Step-3"><a href="#Step-3" class="headerlink" title="Step 3"></a>Step 3</h6><p>　　安装 Rally 所需依赖包及创建相应目录。Dockerfile 使用 <code>RUN &lt;command&gt;</code> 调用系统 shell 运行相关命令，多个命令不建议分别写多个 <code>RUN</code> 指令，因为这会使镜像层次变得复杂，而是建议使用 <code>&amp;&amp;</code> 和 <code>\</code> 连接多条命令并换行书写，优化构建的逻辑结构和代码的可读性。通过下述 5 个步骤完成前期准备，其中 source 是我用来存放下载源码的目录。</p>
+<ul>
+<li>更新软件列表</li>
+<li>安装依赖软件</li>
+<li>时区改为 CST</li>
+<li>反注释开启命令参数补齐</li>
+<li>创建 Rally 源码下载目录</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">RUN apt-get update &amp;&amp; apt-get install --yes \</span><br><span class="line">    bash-completion apt-utils iputils-ping vim wget git-core tzdata \</span><br><span class="line">    python python-pip python-dev &amp;&amp; \</span><br><span class="line">    pip install --upgrade pip &amp;&amp; \</span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"Asia/Shanghai"</span> &gt; /etc/timezone &amp;&amp; \</span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"export TZ='Asia/Shanghai'"</span> &gt;&gt; /etc/bash.bashrc &amp;&amp; \</span><br><span class="line">    sed -i <span class="string">"32,38s/^#//g"</span> /etc/bash.bashrc &amp;&amp; \</span><br><span class="line">    mkdir -p /home/rally/<span class="built_in">source</span></span><br></pre></td></tr></table></figure>
+<h6 id="Step-4"><a href="#Step-4" class="headerlink" title="Step 4"></a>Step 4</h6><p>　　下载 Rally 的安装脚本并进行必要修改后进行安装，同时替换掉需要调用墙外的 js 框架文件变为我们可访问的目标地址。</p>
+<ul>
+<li>下载 12.0.0 的 Rally 安装文件到 <code>/home/rally/</code></li>
+<li>替换安装版本为 12.0.0</li>
+<li>修改 Rally 的 <code>database</code> 保存在 <code>/home/rally/data/</code></li>
+<li>下载的源码保存在 <code>/home/rally/source/</code></li>
+<li>安装时拷贝 Rally 命令补全文件及开启运行容器时输出相关 Info</li>
+<li>安装 Rally</li>
+<li>替换 googleapis 上的 <code>angular.min.js</code> 为 cloudflare 网站上面的</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">RUN wget -P /home/rally/ https://raw.githubusercontent.com/openstack/rally/0.12.0/install_rally.sh &amp;&amp; \</span><br><span class="line">    sed -i <span class="string">'s/^RALLY_GIT_BRANCH=.*/RALLY_GIT_BRANCH="0.12.0"/'</span> /home/rally/install_rally.sh &amp;&amp; \</span><br><span class="line">    sed -i <span class="string">'s/^RALLY_DATABASE_DIR=.*/RALLY_DATABASE_DIR=\/home\/rally\/data/'</span> /home/rally/install_rally.sh &amp;&amp; \</span><br><span class="line">    sed -i <span class="string">'s/SOURCEDIR="\$ORIG_WD".*/SOURCEDIR="\$ORIG_WD"\/home\/rally\/source/'</span> /home/rally/install_rally.sh &amp;&amp; \</span><br><span class="line">    <span class="built_in">echo</span> <span class="string">'cp $SOURCEDIR/etc/motd /etc/motd'</span> &gt;&gt; /home/rally/install_rally.sh &amp;&amp; \</span><br><span class="line">    <span class="built_in">echo</span> <span class="string">'[ ! -z "$TERM" -a -r /etc/motd ] &amp;&amp; cat /etc/motd'</span> &gt;&gt; /etc/bash.bashrc &amp;&amp; \</span><br><span class="line">    <span class="built_in">echo</span> <span class="string">'source /usr/local/etc/bash_completion.d/rally.bash_completion'</span> &gt;&gt; /etc/bash.bashrc &amp;&amp; \</span><br><span class="line">    bash /home/rally/install_rally.sh &amp;&amp; \</span><br><span class="line">    sed -i <span class="string">"s/ajax.googleapis.com\/ajax\/libs\/angularjs/cdnjs.cloudflare.com\/ajax\/libs\/angular.js/"</span> \</span><br><span class="line">           /usr/<span class="built_in">local</span>/lib/python2.7/dist-packages/rally/ui/templates/task/report.html &amp;&amp; \</span><br><span class="line">    sed -i <span class="string">"s/ajax.googleapis.com\/ajax\/libs\/angularjs/cdnjs.cloudflare.com\/ajax\/libs\/angular.js/"</span> \</span><br><span class="line">           /usr/<span class="built_in">local</span>/lib/python2.7/dist-packages/rally/ui/templates/task/trends.html &amp;&amp; \</span><br><span class="line">    sed -i <span class="string">"s/ajax.googleapis.com\/ajax\/libs\/angularjs/cdnjs.cloudflare.com\/ajax\/libs\/angular.js/"</span> \</span><br><span class="line">           /usr/<span class="built_in">local</span>/lib/python2.7/dist-packages/rally/ui/templates/verification/report.html</span><br></pre></td></tr></table></figure>
+<h6 id="Step-5"><a href="#Step-5" class="headerlink" title="Step 5"></a>Step 5</h6><p>　　拷贝 <code>build</code> 过程中指定的上下文目录文件到镜像内部。命令参数 <code>COPY &lt;src&gt;... &lt;dest&gt;</code> ，可以通过同目录下的 <code>.dockerignore</code> 忽略部分不需要传输的文件。这里我是将 Rally 自动测试的执行脚本拷贝到镜像内部，方便后续测试。<br>　　还有另外一个命令 <code>ADD</code> 可以理解为增强版的 <code>COPY</code> ，它不仅能将本地目录的文件拷贝到镜像中，同时还能降远程 url 的文件或目录拷贝至镜像里面，如果源文件是一个压缩包，在拷贝过程中还会自动解压。它的命令参数与 <code>COPY</code> 无二。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">COPY . /home/rally/</span><br></pre></td></tr></table></figure>
+<h6 id="Step-6"><a href="#Step-6" class="headerlink" title="Step 6"></a>Step 6</h6><p>　　安装完毕后清理 apt 以及 pip 安装过程中的缓存。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">RUN apt-get autoremove -y &amp;&amp; \</span><br><span class="line">    rm -rf /var/lib/apt/lists/* &amp;&amp; \</span><br><span class="line">    rm -rf /root/.cache/</span><br></pre></td></tr></table></figure>
+<h6 id="Step-7"><a href="#Step-7" class="headerlink" title="Step 7"></a>Step 7</h6><p>　　建立存放数据库的 <code>/home/rally/data/</code> 目录并重新创建 Rally 的数据库。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">RUN mkdir -p /home/rally/data &amp;&amp; \</span><br><span class="line">    rally db recreate</span><br></pre></td></tr></table></figure>
+<h6 id="Step-8"><a href="#Step-8" class="headerlink" title="Step 8"></a>Step 8</h6><p>　　更改镜像工作目录，使得启动镜像后在 <code>/home/rally/</code> 目录执行命令等。命令参数 <code>WORKDIR &lt;dir&gt;</code> 。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">WORKDIR /home/rally</span><br></pre></td></tr></table></figure>
+<h6 id="Step-9"><a href="#Step-9" class="headerlink" title="Step 9"></a>Step 9</h6><p>　　为了令测试数据持久化，将镜像工作目录挂载到宿主机，启动容器的时候可通过 <code>-v</code> 指定挂载目录，便于数据的查看及持久化保存。命令参数 <code>VLOUME [&quot;&lt;dir&gt;&quot;]</code> 。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">VOLUME [<span class="string">"/home/rally"</span>]</span><br></pre></td></tr></table></figure>
+<h6 id="Step-10"><a href="#Step-10" class="headerlink" title="Step 10"></a>Step 10</h6><p>　　官方是以 <code>ENTRYPOINT [&quot;rally&quot;]</code> 作为容器启动时的默认命令。我们启动容器时指定的命令都将作为参数传给 <code>rally</code> 调用，不会被重写覆盖，这也导致我们无法进入容器内部去执行其他操作。因此摒弃 <code>ENTRYPOINT</code> 而用 <code>CMD</code> 命令，它允许我们启动时用别的命令覆盖，进行其他操作。两者的命令参数为 <code>ENTRYPOINT/CMD [&quot;executable&quot;, &quot;param1&quot;, &quot;param2&quot;]</code> 。一个Dockerfile文件仅允许一个<code>ENTRYPOINT</code> 和 <code>CMD</code> 存在，多次存在的话只有最后一次会生效。当两者同时存在的情况下，可以使用 <code>CMD</code> 给 <code>ENTRYPOINT</code> 传参。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CMD [<span class="string">"/bin/bash"</span>]</span><br></pre></td></tr></table></figure>
+<p>　　至此一个 Rally 的 Dockerfile 文件编写完毕，将上面 Step 的代码结合，创建一个目录，并将代码文件命名为 Dockerfile 进行保存，执行下述命令即可构建属于我们的 Rally 容器镜像。构建完毕后可通过 <code>docker images</code> 命令查看。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># docker build -t rally_container:0.12.0 .</span></span><br></pre></td></tr></table></figure>
+<h6 id="附录：Rally-Documentation"><a href="#附录：Rally-Documentation" class="headerlink" title="附录：Rally Documentation "></a><font color="#FF0000">附录：Rally Documentation </font></h6>
+
+	<div class="row">
+    <embed src="https://media.readthedocs.org/pdf/rally/stable/rally.pdf" width="100%" height="550" type="application/pdf">
+	</div>
+
+
+
+<h3 id="Tempest"><a href="#Tempest" class="headerlink" title="Tempest"></a>Tempest</h3><blockquote>
+<p>　　Tempest 是 Openstack 的集成测试框架，对于验证 OpenStack 部署，包含了基本组件的 API 测试、场景测试和单元测试。Tempest 对 Openstack 终端发起一系列 API 请求，并且对终端的响应进行验证。它可以验证代码的正确性，使得 OpenStack 相关测试效率得到大幅度提升，已经成为 OpenStack 项目中不可或缺的组成部分。</p>
+</blockquote>
+<div align="center" style="align:center"><br><font size="6">Tempest 代码架构 <br></font><br><img src="https://www.ibm.com/developerworks/cn/cloud/library/1403_liuyu_openstacktempest/image005.jpg" alt="Tempest 代码架构" title="Tempest 代码架构"><br><br></div>
+
+<p>　　Tempest 没有官方的 Docker 镜像提供给我们参考和使用，我们可以按照自己安装过程中的步骤配置 Dockerfile 文件。此处仅记录我安装习惯的配置。</p>
+<h6 id="Step-1-1"><a href="#Step-1-1" class="headerlink" title="Step 1"></a>Step 1</h6><p>　　指定 ubuntu:16.04 作为基础镜像。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FROM ubuntu:16.04</span><br></pre></td></tr></table></figure>
+<h6 id="Step-2-1"><a href="#Step-2-1" class="headerlink" title="Step 2"></a>Step 2</h6><p>　　备注作者信息。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MAINTAINER AnanasYuu &lt;yuyihuang0702@163.com&gt;</span><br></pre></td></tr></table></figure>
+<h6 id="Step-3-1"><a href="#Step-3-1" class="headerlink" title="Step 3"></a>Step 3</h6><p>　　安装 Tempest 依赖软件包、修改时区、反注释命令补全功能，创建源码下载目录。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">RUN apt-get update &amp;&amp; apt-get install --yes \</span><br><span class="line">    bash-completion apt-utils vim git wget curl gcc tzdata \</span><br><span class="line">    python-dev python-libxml2 python-setuptools \</span><br><span class="line">    libxml2-dev libxslt-dev lib32z1-dev libssl-dev libxslt1-dev libsasl2-dev libsqlite3-dev libldap2-dev libffi-dev &amp;&amp; \</span><br><span class="line">    easy_install pip &amp;&amp; \</span><br><span class="line">    pip install --upgrade setuptools &amp;&amp; \</span><br><span class="line">    pip install xunit2testrail junitxml virtualenv python-openstackclient &amp;&amp; \</span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"Asia/Shanghai"</span> &gt; /etc/timezone &amp;&amp; \</span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"export TZ='Asia/Shanghai'"</span> &gt;&gt; /etc/bash.bashrc &amp;&amp; \</span><br><span class="line">    sed -i <span class="string">"32,38s/^#//g"</span> /etc/bash.bashrc &amp;&amp; \</span><br><span class="line">    mkdir -p /home/tempest/<span class="built_in">source</span></span><br></pre></td></tr></table></figure>
+<h6 id="Step-4-1"><a href="#Step-4-1" class="headerlink" title="Step 4"></a>Step 4</h6><p>　　下载版本为 18.0.0 的 Tempest 源码，<code>pip</code> 安装所需依赖组件及调试所需的 <code>ipdb</code> ，最后安装 Tempest 。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">RUN <span class="built_in">cd</span> /home/tempest/<span class="built_in">source</span> &amp;&amp; \</span><br><span class="line">    git <span class="built_in">clone</span> -b 18.0.0 https://git.openstack.org/openstack/tempest ./ &amp;&amp; \</span><br><span class="line">    pip install -r ./requirements.txt &amp;&amp; \</span><br><span class="line">    pip install -r ./<span class="built_in">test</span>-requirements.txt &amp;&amp; \</span><br><span class="line">    pip install nose tox ipdb &amp;&amp; \</span><br><span class="line">    pip install .</span><br></pre></td></tr></table></figure>
+<h6 id="Step-5-1"><a href="#Step-5-1" class="headerlink" title="Step 5"></a>Step 5</h6><p>　　生成配置文件样本并拷贝一份以便后续配置。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">RUN <span class="built_in">cd</span> /home/tempest/<span class="built_in">source</span> &amp;&amp; \</span><br><span class="line">    tox -egenconfig &amp;&amp; \</span><br><span class="line">    cp etc/accounts.yaml.sample etc/accounts.yaml &amp;&amp; \</span><br><span class="line">    cp etc/tempest.conf.sample etc/tempest.conf</span><br></pre></td></tr></table></figure>
+<h6 id="Step-6-1"><a href="#Step-6-1" class="headerlink" title="Step 6"></a>Step 6</h6><p>　　在 <code>/home/tempest/workdir</code> 文件夹中初始化 Tempest 。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">RUN tempest init /home/tempest/workdir</span><br></pre></td></tr></table></figure></p>
+<h6 id="Step-7-1"><a href="#Step-7-1" class="headerlink" title="Step 7"></a>Step 7</h6><p>　　指定 Tempest 工作目录。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">WORKDIR /root/tempest/workdir</span><br></pre></td></tr></table></figure>
+<h6 id="Step-8-1"><a href="#Step-8-1" class="headerlink" title="Step 8"></a>Step 8</h6><p>　　指定容器启动命令。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CMD [<span class="string">"/bin/bash"</span>]</span><br></pre></td></tr></table></figure>
+<p>　　至此 Tempest 的 Dockerfile 文件也已编写完毕，将上面 Step 的代码结合，创建一个目录，并将代码文件命名为 Dockerfile 进行保存，执行下述命令即可构建属于我们的 Tempest 镜像。构建完毕后通过 <code>docker images</code> 命令查看。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># docker build -t tempest_container:18.0.0 .</span></span><br></pre></td></tr></table></figure>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a><strong>总结</strong></h2><p>　　通过 Dockerfile 构建 Rally 以及 Tempest 镜像，不仅能让我们快速的搭建测试环境，也利于持续集成及持续交付过程中节省时间，统一及标准化环境。而且与 OpenStack 隔离开来，更是减少了交互时的互相干扰。并且 <code>Docker volume</code> 的存在也实现了测试输出结果保存至宿主机并持久化。</p>
+<p>　　最后将 Rally 以及 Tempest 的容器镜像上传至 <code>Docker Hub</code> 或者保存至本地 <code>registry</code> ，方便后续使用。</p>
+<ul>
+<li><a href="https://hub.docker.com/r/ananasyuu/docker_rally/" target="_blank" rel="noopener">Rally 镜像的 Docker Hub 链接</a></li>
+<li><a href="https://hub.docker.com/r/ananasyuu/docker_tempest/" target="_blank" rel="noopener">Tempest 镜像的 Docker Hub 链接</a></li>
+</ul>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>感谢英雄仗义援助<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/alipay.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/wxpay.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -207,7 +355,7 @@
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -220,55 +368,95 @@
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http:ananasyu.top/2018/05/16/Build-Rally-and-Tempest-based-on-Dockerfile/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/05/10/Hello-Hexo/" class="archive-article-date">
-  	<time datetime="2018-05-10T09:50:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-10</time>
-</a>
-        </div>
-    	 
+<nav id="article-nav">
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/10/Hello-Hexo/">Hello, Hexo !</a>
-    </h1>
+  
+    <a href="/2018/05/10/Hello-Hexo/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Hello, Hexo !</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        
+    </div>
+</aside>
+
+
+
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">essay</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -299,8 +487,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
