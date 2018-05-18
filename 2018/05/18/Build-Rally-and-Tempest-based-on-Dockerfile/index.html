@@ -18,7 +18,7 @@
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://rally.readthedocs.io/en/stable/_images/Rally-Actions.png">
 <meta property="og:image" content="https://www.ibm.com/developerworks/cn/cloud/library/1403_liuyu_openstacktempest/image005.jpg">
-<meta property="og:updated_time" content="2018-05-18T01:22:43.274Z">
+<meta property="og:updated_time" content="2018-05-18T02:56:16.168Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="基于 Dockerfile 构建 Rally 和 Tempest 容器镜像">
 <meta name="twitter:description" content="背景　　Rally 和 Tempest 作为 OpenStack 的两个测试框架，在测试 OpenStack 这个庞然大物中扮演着不可或缺的角色。作为 OpenStack 的项目之一，在使用过程中势必会调用部分 OpenStack 的运行库，这将有可能对整个环境造成污染，也不利于多云平台的复用及隔离。 　　Docker 的出现，无疑为我们提供了完美的解决方法。通过容器化将 Rally 以及 Tem">
@@ -206,7 +206,7 @@ var _hmt = _hmt || [];
   <span class="archive-article-date">
     <span class="post-time">
       <span class="post-meta-item-text">  字数统计: </span>
-      <span class="post-count">2,709字</span>
+      <span class="post-count">2,755字</span>
       &nbsp; | &nbsp;
       <span class="post-meta-item-text">  阅读时长: </span>
       <span class="post-count">11分</span>
@@ -274,7 +274,7 @@ var _hmt = _hmt || [];
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">WORKDIR /home/rally</span><br></pre></td></tr></table></figure>
 <h6 id="Step-9"><a href="#Step-9" class="headerlink" title="Step 9"></a>Step 9</h6><p>　　为了令测试数据持久化，将镜像数据存储文件夹挂载到宿主机，命令参数 <code>VLOUME [&quot;&lt;dir&gt;&quot;]</code> 。启动容器的时候会在 <code>/var/lib/docker/volumes/</code> 下创建一个随机命名的文件夹并将其挂载关联，也可在启动时通过 <code>-v</code> 挂载到指定目录，便于数据的查看及持久化保存。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">VOLUME [<span class="string">"/home/rally"</span>]</span><br></pre></td></tr></table></figure>
-<h6 id="Step-10"><a href="#Step-10" class="headerlink" title="Step 10"></a>Step 10</h6><p>　　官方是以 <code>ENTRYPOINT [&quot;rally&quot;]</code> 作为容器启动时的默认命令。我们启动容器时指定的命令都将作为参数传给 <code>rally</code> 调用，不会被重写覆盖，这也导致我们无法进入容器内部去执行其他操作。因此摒弃 <code>ENTRYPOINT</code> 而用 <code>CMD</code> 命令，它允许我们启动时用别的命令覆盖，进行其他操作。两者的命令参数为 <code>ENTRYPOINT/CMD [&quot;executable&quot;, &quot;param1&quot;, &quot;param2&quot;]</code> 。一个Dockerfile文件仅允许一个<code>ENTRYPOINT</code> 和 <code>CMD</code> 存在，多次存在的话只有最后一次会生效。当两者同时存在的情况下，可以使用 <code>CMD</code> 给 <code>ENTRYPOINT</code> 传参。</p>
+<h6 id="Step-10"><a href="#Step-10" class="headerlink" title="Step 10"></a>Step 10</h6><p>　　官方是以 <code>ENTRYPOINT [&quot;rally&quot;]</code> 作为容器启动时的默认命令。我们启动容器时指定的命令都将作为参数传给 <code>rally</code> 调用，不会被重写覆盖，这也导致我们无法直接进入容器内部去执行其他操作，解决办法是在使用 <code>docker run</code> 的时候用 <code>--rm --entrypoint /bin/bash</code> 临时替换。测试过程中我喜欢进去容器内部操作，因此摒弃 <code>ENTRYPOINT</code> 而用 <code>CMD</code> 命令，它允许我们启动时用别的命令覆盖，进行其他操作。两者的命令参数为 <code>ENTRYPOINT/CMD [&quot;executable&quot;, &quot;param1&quot;, &quot;param2&quot;]</code> 。一个Dockerfile文件仅允许一个<code>ENTRYPOINT</code> 和 <code>CMD</code> 存在，多次存在的话只有最后一次会生效。当两者同时存在的情况下，可以使用 <code>CMD</code> 给 <code>ENTRYPOINT</code> 传参，比如 <code>ENTRYPOINT [&quot;rally&quot;]</code> <code>CMD [&quot;--version&quot;]</code> 。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CMD [<span class="string">"/bin/bash"</span>]</span><br></pre></td></tr></table></figure>
 <p>　　至此一个 Rally 的 Dockerfile 文件编写完毕，将上面 Step 的代码结合，创建一个目录，并将代码文件命名为 Dockerfile 进行保存，执行下述命令即可构建属于我们的 Rally 容器镜像。构建完毕后可通过 <code>docker images</code> 命令查看。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># docker build -t rally_container:0.12.0 .</span></span><br></pre></td></tr></table></figure>
@@ -566,6 +566,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">essay</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Dockerfile</a>
               </li>
              
@@ -575,10 +579,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Tempest</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">essay</a>
               </li>
             
             <div class="clearfix"></div>
