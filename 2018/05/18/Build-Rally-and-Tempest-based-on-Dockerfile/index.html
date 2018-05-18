@@ -18,7 +18,7 @@
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://rally.readthedocs.io/en/stable/_images/Rally-Actions.png">
 <meta property="og:image" content="https://www.ibm.com/developerworks/cn/cloud/library/1403_liuyu_openstacktempest/image005.jpg">
-<meta property="og:updated_time" content="2018-05-17T08:41:15.459Z">
+<meta property="og:updated_time" content="2018-05-18T01:22:43.274Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="基于 Dockerfile 构建 Rally 和 Tempest 容器镜像">
 <meta name="twitter:description" content="背景　　Rally 和 Tempest 作为 OpenStack 的两个测试框架，在测试 OpenStack 这个庞然大物中扮演着不可或缺的角色。作为 OpenStack 的项目之一，在使用过程中势必会调用部分 OpenStack 的运行库，这将有可能对整个环境造成污染，也不利于多云平台的复用及隔离。 　　Docker 的出现，无疑为我们提供了完美的解决方法。通过容器化将 Rally 以及 Tem">
@@ -206,7 +206,7 @@ var _hmt = _hmt || [];
   <span class="archive-article-date">
     <span class="post-time">
       <span class="post-meta-item-text">  字数统计: </span>
-      <span class="post-count">2,704字</span>
+      <span class="post-count">2,709字</span>
       &nbsp; | &nbsp;
       <span class="post-meta-item-text">  阅读时长: </span>
       <span class="post-count">11分</span>
@@ -309,7 +309,7 @@ var _hmt = _hmt || [];
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CMD [<span class="string">"/bin/bash"</span>]</span><br></pre></td></tr></table></figure>
 <p>　　至此 Tempest 的 Dockerfile 文件也已编写完毕，将上面 Step 的代码结合，创建一个目录，并将代码文件命名为 Dockerfile 进行保存，执行下述命令即可构建属于我们的 Tempest 镜像。构建完毕后通过 <code>docker images</code> 命令查看。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># docker build -t tempest_container:18.0.0 .</span></span><br></pre></td></tr></table></figure>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a><strong>总结</strong></h2><p>　　通过 Dockerfile 构建 Rally 以及 Tempest 镜像，不仅能让我们快速的搭建测试环境，也利于持续集成及持续交付过程中节省时间，统一及标准化环境。而且与 OpenStack 隔离开来，更是减少了交互时的互相干扰。并且 <code>Docker volume</code> 的存在也实现了测试输出结果保存至宿主机并持久化。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a><strong>总结</strong></h2><p>　　通过 Dockerfile 构建 Rally 以及 Tempest 镜像，不仅能让我们快速的搭建测试环境，也利于持续集成及持续交付过程中节省时间，统一及标准化环境。而且与 OpenStack 隔离开来，更是减少了测试过程中的互相干扰。并且 <code>Docker volume</code> 的存在也确保了测试输出结果能同步保存至宿主机并持久化。</p>
 <p>　　最后将 Rally 以及 Tempest 的容器镜像上传至 <code>Docker Hub</code> 或者保存至本地 <code>registry</code> ，方便后续使用。</p>
 <ul>
 <li><a href="https://hub.docker.com/r/ananasyuu/docker_rally/" target="_blank" rel="noopener">Rally 镜像的 Docker Hub 链接</a></li>
