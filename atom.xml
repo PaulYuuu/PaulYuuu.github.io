@@ -5,9 +5,9 @@
   <subtitle>寡言少语，生人勿近</subtitle>
   <link href="/atom.xml" rel="self"/>
   
-  <link href="www.ananasyu.top/"/>
+  <link href="http://www.ananasyu.top/"/>
   <updated>2018-05-20T05:21:31.258Z</updated>
-  <id>www.ananasyu.top/</id>
+  <id>http://www.ananasyu.top/</id>
   
   <author>
     <name>Ananas</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>基于 Dockerfile 构建 Rally 和 Tempest 容器镜像</title>
-    <link href="www.ananasyu.top/2018/Build-Rally-and-Tempest-based-on-Dockerfile.html"/>
-    <id>www.ananasyu.top/2018/Build-Rally-and-Tempest-based-on-Dockerfile.html</id>
+    <link href="http://www.ananasyu.top/posts/Build-Rally-and-Tempest-based-on-Dockerfile.html"/>
+    <id>http://www.ananasyu.top/posts/Build-Rally-and-Tempest-based-on-Dockerfile.html</id>
     <published>2018-05-18T11:00:00.000Z</published>
     <updated>2018-05-20T05:21:31.258Z</updated>
     
@@ -40,21 +40,21 @@
     
     </summary>
     
-      <category term="Docker" scheme="www.ananasyu.top/categories/Docker/"/>
+      <category term="Docker" scheme="http://www.ananasyu.top/categories/Docker/"/>
     
     
-      <category term="Dockerfile" scheme="www.ananasyu.top/tags/Dockerfile/"/>
+      <category term="Dockerfile" scheme="http://www.ananasyu.top/tags/Dockerfile/"/>
     
-      <category term="Rally" scheme="www.ananasyu.top/tags/Rally/"/>
+      <category term="Rally" scheme="http://www.ananasyu.top/tags/Rally/"/>
     
-      <category term="Tempest" scheme="www.ananasyu.top/tags/Tempest/"/>
+      <category term="Tempest" scheme="http://www.ananasyu.top/tags/Tempest/"/>
     
   </entry>
   
   <entry>
     <title>Hello, Hexo !</title>
-    <link href="www.ananasyu.top/2018/Hello-Hexo.html"/>
-    <id>www.ananasyu.top/2018/Hello-Hexo.html</id>
+    <link href="http://www.ananasyu.top/posts/Hello-Hexo.html"/>
+    <id>http://www.ananasyu.top/posts/Hello-Hexo.html</id>
     <published>2018-05-10T09:50:30.000Z</published>
     <updated>2018-05-11T01:14:09.000Z</updated>
     
@@ -68,7 +68,7 @@
     </summary>
     
     
-      <category term="essay" scheme="www.ananasyu.top/tags/essay/"/>
+      <category term="essay" scheme="http://www.ananasyu.top/tags/essay/"/>
     
   </entry>
   
