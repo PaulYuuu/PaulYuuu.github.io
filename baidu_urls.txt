@@ -1,2 +1,2 @@
-www.ananasyu.top/2018/05/18/Build-Rally-and-Tempest-based-on-Dockerfile/
-www.ananasyu.top/2018/05/10/Hello-Hexo/
+www.ananasyu.top/2018/Build-Rally-and-Tempest-based-on-Dockerfile.html
+www.ananasyu.top/2018/Hello-Hexo.html
