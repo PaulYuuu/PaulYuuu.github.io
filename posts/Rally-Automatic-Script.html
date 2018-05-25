@@ -6,19 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://www.ananasyu.top">
-  <title>Tag: Rally | AnanasYu的博客</title>
+  <title>Rally+Automatic+Script | AnanasYu的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="记录职业生涯及生活中的所学所想。。。">
-<meta name="keywords" content="Linux,OpenStack,Docker">
-<meta property="og:type" content="website">
-<meta property="og:title" content="AnanasYu的博客">
-<meta property="og:url" content="https://www.ananasyu.top/tags/Rally/index.html">
+  <meta name="description" content="背景　　Rally 作为测试 OpenStack 性能的主要项目，事实上 Rally 还可以实现云的部署和云产品的功能集成测试。Rally 主要包括一下几个部分：  Deploy Engine：以类似一个插件形式的东西，和其他部署工具（比如 DevStack，Fuel，Anvil 等）一起工作来简化和统一部署流程。 Verification：使用 Tempset（OpenStack 社区的接口自动">
+<meta name="keywords" content="Rally,Shell">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Rally+Automatic+Script">
+<meta property="og:url" content="https://www.ananasyu.top/posts/Rally-Automatic-Script.html">
 <meta property="og:site_name" content="AnanasYu的博客">
-<meta property="og:description" content="记录职业生涯及生活中的所学所想。。。">
+<meta property="og:description" content="背景　　Rally 作为测试 OpenStack 性能的主要项目，事实上 Rally 还可以实现云的部署和云产品的功能集成测试。Rally 主要包括一下几个部分：  Deploy Engine：以类似一个插件形式的东西，和其他部署工具（比如 DevStack，Fuel，Anvil 等）一起工作来简化和统一部署流程。 Verification：使用 Tempset（OpenStack 社区的接口自动">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-05-25T07:41:28.682Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="AnanasYu的博客">
-<meta name="twitter:description" content="记录职业生涯及生活中的所学所想。。。">
+<meta name="twitter:title" content="Rally+Automatic+Script">
+<meta name="twitter:description" content="背景　　Rally 作为测试 OpenStack 性能的主要项目，事实上 Rally 还可以实现云的部署和云产品的功能集成测试。Rally 主要包括一下几个部分：  Deploy Engine：以类似一个插件形式的东西，和其他部署工具（比如 DevStack，Fuel，Anvil 等）一起工作来简化和统一部署流程。 Verification：使用 Tempset（OpenStack 社区的接口自动">
   
     <link rel="alternative" href="/atom.xml" title="AnanasYu的博客" type="application/atom+xml">
   
@@ -181,36 +182,153 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-Rally-Automatic-Script" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/posts/Rally-Automatic-Script.html" class="archive-article-date">
-  	<time datetime="2018-05-25T11:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-25</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/posts/Rally-Automatic-Script.html">Rally+Automatic+Script</a>
+    <h1 class="article-title" itemprop="name">
+      Rally+Automatic+Script
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+          <a href="/posts/Rally-Automatic-Script.html" class="archive-article-date">
+  	<time datetime="2018-05-25T11:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-25</time>
+</a>
+        
+        
+          <div>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <span class="archive-article-date">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+          <span class="post-meta-item-text">  字数统计: </span>
+          <span class="post-count">1,932字</span>
+        </span>
+      </span>
+
+   <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-clock-o"></i>
+          <span class="post-meta-item-text">  阅读时长: </span>
+          <span class="post-count">9分钟</span>
+      </span>
+    </span>
+  </span>
+</div>
+
+        
+        <br>
+      </header>
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a><strong>背景</strong></h2><p>　　Rally 作为测试 OpenStack 性能的主要项目，事实上 Rally 还可以实现云的部署和云产品的功能集成测试。Rally 主要包括一下几个部分：</p>
+<ol>
+<li>Deploy Engine：以类似一个插件形式的东西，和其他部署工具（比如 <code>DevStack</code>，<code>Fuel</code>，<code>Anvil</code> 等）一起工作来简化和统一部署流程。</li>
+<li>Verification：使用 Tempset（OpenStack 社区的接口自动化测试工具）来验证已部署的 OpenStack 云环境的功能性。</li>
+<li>Benchmark Engine：允许在云环境中制造并发负载，并进行性能基准测试。</li>
+<li>Generate report：报表生成器，负责读取rally的测试结果（存储于数据库），生成 html、xml 等格式的报表。</li>
+</ol>
+<p>　　Rally 的测试用例是使用 <code>json</code> 与 <code>yaml</code> 语言编写的，阅读性很高，并且可以将多个用例合并到一个文件里执行。不过 Rally 每次执行 task 的时候都只能指定一个文件，无法批量执行多个任务，而将用例合并也不利于我们细化分析结果，这就阻止了我们自动化的脚步。</p>
+<p>　　如果我们将所需要测试的用例分类整理好，并用脚本遍历每一个文件，将其传输给 Rally 执行测试，那么可以简化我们操作步骤及次数，这也是编写此脚本的目的。而后续将其交给 Jenkins 等 CI 平台自动构建，那么我们能将更多的精力花费去定位及解决问题的层面上，而不是去产生问题哈哈哈~~~</p>
+<p>　　接下来将以 shell 脚本去搜集我们指定目录下的测试文件，并分类整理好以及输出统计数量给我们，最后执行所有用例。</p>
+<a id="more"></a>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a><strong>正文</strong></h2><h3 id="统计脚本"><a href="#统计脚本" class="headerlink" title="统计脚本"></a>统计脚本</h3><p>　　统计待测试的各个组件的用例数量，完成后反馈各组件用例数量及总数量，以及各个用例的名称。下面是 Rally 场景测试中用例所包含的目录结构，我这里只挑取几个关键组件编写脚本，其他的可照猫画虎。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ ls home/rally/<span class="built_in">source</span>/samples/tasks/scenarios</span><br><span class="line">authenticate  cinder     dummy  glance   heat    keystone  manila   monasca  neutron  quotas    sahara  swift  watcher   zaqar</span><br><span class="line">ceilometer    designate  ec2    gnocchi  ironic  magnum    mistral  murano   nova     requests  senlin  vm     workload</span><br></pre></td></tr></table></figure>
+<h6 id="脚本初始化及变量定义"><a href="#脚本初始化及变量定义" class="headerlink" title="脚本初始化及变量定义"></a>脚本初始化及变量定义</h6><p>　　获取脚本所在目录并进入该目录，后续命令都以此为父目录，避免过长的绝对路径产生，也避免我们从不同地方执行脚本导致的路径问题，并做相应的准备。</p>
+<ul>
+<li>进入脚本所在目录作为接下来脚本工作目录；</li>
+<li>以当前时间作为变量记录脚本执行时间；</li>
+<li>创建存放的目录以及统计文件；</li>
+<li>定义测试用例存放目录。</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> `dirname <span class="variable">$0</span>`</span><br><span class="line">time=`date +%H:%M:%S`</span><br><span class="line">mkdir -p testcase_result/<span class="variable">$time</span></span><br><span class="line">testcase_file=testcase_result/<span class="variable">$time</span>/rally_testcase.txt</span><br><span class="line">total_file=testcase_result/<span class="variable">$time</span>/rally_total.txt</span><br><span class="line">rally_task_dir=<span class="built_in">source</span>/samples/tasks/scenarios</span><br></pre></td></tr></table></figure>
+<h6 id="各组件用例统计"><a href="#各组件用例统计" class="headerlink" title="各组件用例统计"></a>各组件用例统计</h6><p>　　分模块将各个组件的用例数量以及用例名称写入统计文件中，以 keystone 为例：</p>
+<ul>
+<li>查找所有 keystone文件夹下的以 yaml 结尾的用例文件（当然你也可以查找 json 的）；</li>
+<li>统计所有用例中所有 <code>Keystone*</code> 命名的用例数量；</li>
+<li>将用例数量写入 rally_total.txt 文件中；</li>
+<li>使用 <code>awk</code> 将每个用例名称按顺序写入 rally_testcase.txt 文件中；</li>
+<li>通过 <code>sed</code> 去掉用例头部的类别，其中使用正则 <code>.*</code> 匹配多个字符，<code>\.</code> 使 <code>.</code> 不被转义。</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#keystone</span></span><br><span class="line">keystone_case=`find <span class="variable">$rally_task_dir</span>/keystone -name <span class="string">"*.yaml"</span>`</span><br><span class="line">keystone_num=`grep -rn <span class="string">'\&lt;Keystone'</span> <span class="variable">$keystone_case</span> | wc -l`</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"Keystone Testcases Number: "</span><span class="variable">$keystone_num</span> &gt; <span class="variable">$total_file</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"Keystone"</span> &gt; <span class="variable">$testcase_file</span></span><br><span class="line">grep -rn <span class="string">'\&lt;Keystone'</span> <span class="variable">$keystone_case</span> | awk <span class="string">'&#123;print NR":",$2&#125;'</span> &gt;&gt; <span class="variable">$testcase_file</span></span><br><span class="line">sed -i <span class="string">'s/Keystone.*\.//g'</span> <span class="variable">$testcase_file</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>这部分代码执行后在文件中的输出结果如下：</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">$ cat rally_total.txt</span><br><span class="line">Keystone Testcases Number: 21</span><br><span class="line"></span><br><span class="line">$ cat rally_testcase.txt</span><br><span class="line">Keystone</span><br><span class="line">1: add_and_remove_user_role</span><br><span class="line">2: authenticate_user_and_validate_token</span><br><span class="line">3: create_add_and_list_user_roles</span><br><span class="line">4: create_and_delete_ec2credential</span><br><span class="line">5: create_and_delete_role</span><br><span class="line">6: create_and_delete_service</span><br><span class="line">7: create_delete_user</span><br><span class="line">8: create_and_get_role</span><br><span class="line">9: create_and_list_ec2credentials</span><br><span class="line">……</span><br><span class="line">……</span><br><span class="line">……</span><br></pre></td></tr></table></figure>
+<h6 id="统计所有组件的用例总数"><a href="#统计所有组件的用例总数" class="headerlink" title="统计所有组件的用例总数"></a>统计所有组件的用例总数</h6><p>　　将每个组件的用例总数统计并写入文本，并将上述每个用例名称最后的 <code>:</code> 去除。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#total</span></span><br><span class="line"><span class="built_in">let</span> total=<span class="variable">$keystone_num</span>+<span class="variable">$glance_num</span>+<span class="variable">$nova_num</span>+……</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"Total Testcases Number: <span class="variable">$total</span>"</span> &gt;&gt; <span class="variable">$total_file</span></span><br><span class="line">sed -i <span class="string">'s/:$//'</span> <span class="variable">$testcase_file</span></span><br></pre></td></tr></table></figure>
+<h6 id="运行用例任务脚本"><a href="#运行用例任务脚本" class="headerlink" title="运行用例任务脚本"></a>运行用例任务脚本</h6><p>　　统计完成后，使用 <code>for</code> 循环执行相应组件的任务脚本。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Run Scripts tests</span></span><br><span class="line"><span class="built_in">cd</span> testcase_result/<span class="variable">$time</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> ../../rally_scripts/*.sh</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">    bash <span class="variable">$i</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+<p>　　我这里只选取了基础的 <code>keystone</code> <code>glance</code> <code>nova</code> <code>neutron</code> <code>cinder</code> 五个组件做测试，整个 shell 脚本如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> `dirname <span class="variable">$0</span>`</span><br><span class="line">time=`date +%H:%M:%S`</span><br><span class="line">mkdir -p testcase_result/<span class="variable">$time</span></span><br><span class="line">testcase_file=testcase_result/<span class="variable">$time</span>/rally_testcase.txt</span><br><span class="line">total_file=testcase_result/<span class="variable">$time</span>/rally_total.txt</span><br><span class="line">rally_task_dir=<span class="built_in">source</span>/samples/tasks/scenarios</span><br><span class="line"></span><br><span class="line"><span class="comment">#keystone</span></span><br><span class="line">keystone_case=`find <span class="variable">$rally_task_dir</span>/keystone -name <span class="string">"*.yaml"</span>`</span><br><span class="line">keystone_num=`grep -rn <span class="string">'\&lt;Keystone'</span> <span class="variable">$keystone_case</span> | wc -l`</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"Keystone Testcases Number: "</span><span class="variable">$keystone_num</span> &gt; <span class="variable">$total_file</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"Keystone"</span> &gt; <span class="variable">$testcase_file</span></span><br><span class="line">grep -rn <span class="string">'\&lt;Keystone'</span> <span class="variable">$keystone_case</span> | awk <span class="string">'&#123;print NR":",$2&#125;'</span> &gt;&gt; <span class="variable">$testcase_file</span></span><br><span class="line">sed -i <span class="string">'s/Keystone.*\.//g'</span> <span class="variable">$testcase_file</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#glance</span></span><br><span class="line">glance_case=`find <span class="variable">$rally_task_dir</span>/glance -name <span class="string">"*.yaml"</span>`</span><br><span class="line">glance_num=`grep -rn <span class="string">'\&lt;Glance'</span> <span class="variable">$glance_case</span> | wc -l`</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"Glance Testcases Number: "</span><span class="variable">$glance_num</span> &gt;&gt; <span class="variable">$total_file</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">""</span> &gt;&gt; <span class="variable">$testcase_file</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"Glance"</span> &gt;&gt; <span class="variable">$testcase_file</span></span><br><span class="line">grep -rn <span class="string">'\&lt;Glance'</span> <span class="variable">$glance_case</span> | awk <span class="string">'&#123;print NR":",$2&#125;'</span> &gt;&gt; <span class="variable">$testcase_file</span></span><br><span class="line">sed -i <span class="string">'s/Glance.*\.//g'</span> <span class="variable">$testcase_file</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#nova</span></span><br><span class="line">nova_case=`find <span class="variable">$rally_task_dir</span>/nova -name <span class="string">"*.yaml"</span>`</span><br><span class="line">nova_num=`grep -rn <span class="string">'\&lt;Nova'</span> <span class="variable">$nova_case</span> | wc -l`</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"Nova Testcases Number: "</span><span class="variable">$nova_num</span> &gt;&gt; <span class="variable">$total_file</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">""</span> &gt;&gt; <span class="variable">$testcase_file</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"Nova"</span> &gt;&gt; <span class="variable">$testcase_file</span></span><br><span class="line">grep -rn <span class="string">'\&lt;Nova'</span> <span class="variable">$nova_case</span> | awk <span class="string">'&#123;print NR":",$2&#125;'</span> &gt;&gt; <span class="variable">$testcase_file</span></span><br><span class="line">sed -i <span class="string">'s/Nova.*\.//g'</span> <span class="variable">$testcase_file</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#neutron</span></span><br><span class="line">neutron_case=`find <span class="variable">$rally_task_dir</span>/neutron -name <span class="string">"*.yaml"</span>`</span><br><span class="line">neutron_num=`grep -rn <span class="string">'\&lt;Neutron'</span> <span class="variable">$neutron_case</span> | wc -l`</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"Neutron Testcases Number: "</span><span class="variable">$neutron_num</span> &gt;&gt; <span class="variable">$total_file</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">""</span> &gt;&gt; <span class="variable">$testcase_file</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"Neutron"</span> &gt;&gt; <span class="variable">$testcase_file</span></span><br><span class="line">grep -rn <span class="string">'\&lt;Neutron'</span> <span class="variable">$neutron_case</span> | awk <span class="string">'&#123;print NR":",$2&#125;'</span> &gt;&gt; <span class="variable">$testcase_file</span></span><br><span class="line">sed -i <span class="string">'s/Neutron.*\.//g'</span> <span class="variable">$testcase_file</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#cinder</span></span><br><span class="line">cinder_case=`find <span class="variable">$rally_task_dir</span>/cinder -name <span class="string">"*.yaml"</span>`</span><br><span class="line">cinder_num=`grep -rn <span class="string">'\&lt;Cinder'</span> <span class="variable">$cinder_case</span> | wc -l`</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"Cinder Testcases Number: "</span><span class="variable">$cinder_num</span> &gt;&gt; <span class="variable">$total_file</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">""</span> &gt;&gt; <span class="variable">$testcase_file</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"Cinder"</span> &gt;&gt; <span class="variable">$testcase_file</span></span><br><span class="line">grep -rn <span class="string">'\&lt;Cinder'</span> <span class="variable">$cinder_case</span> | awk <span class="string">'&#123;print NR":",$2&#125;'</span> &gt;&gt; <span class="variable">$testcase_file</span></span><br><span class="line">sed -i <span class="string">'s/Cinder.*\.//g'</span> <span class="variable">$testcase_file</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#total</span></span><br><span class="line"><span class="built_in">let</span> total=<span class="variable">$keystone_num</span>+<span class="variable">$glance_num</span>+<span class="variable">$nova_num</span>+<span class="variable">$neutron_num</span>+<span class="variable">$cinder_num</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"Total Testcases Number: <span class="variable">$total</span>"</span> &gt;&gt; <span class="variable">$total_file</span></span><br><span class="line">sed -i <span class="string">'s/:$//'</span> <span class="variable">$testcase_file</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Run Scripts tests</span></span><br><span class="line"><span class="built_in">cd</span> testcase_result/<span class="variable">$time</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> ../../rally_scripts/*.sh</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">    bash <span class="variable">$i</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>rally_total.txt 统计结果如下：</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ cat rally_total.txt</span><br><span class="line">Keystone Testcases Number: 21</span><br><span class="line">Glance Testcases Number: 8</span><br><span class="line">Nova Testcases Number: 63</span><br><span class="line">Neutron Testcases Number: 45</span><br><span class="line">Cinder Testcases Number: 41</span><br><span class="line">Total Testcases Number: 178</span><br></pre></td></tr></table></figure>
+<p>　　其实该脚本可以变得更简单，那就是将 <code>rally_task_dir</code> 下的文件夹作为变量，使用 <code>for</code> 循环将变量文件夹下面的用例通过上述方式一一归档，有兴趣的话可以自己构想实现。</p>
+<h3 id="用例执行脚本"><a href="#用例执行脚本" class="headerlink" title="用例执行脚本"></a>用例执行脚本</h3><h6 id="设定存放目录及变量"><a href="#设定存放目录及变量" class="headerlink" title="设定存放目录及变量"></a>设定存放目录及变量</h6><p>　　用来执行具体组件所有用例的测试脚本，同样以 keystone 为例：</p>
+<ul>
+<li>创建用来存放<font color="#0080C0"> log </font>与<font color="#0080C0"> html </font>输出的文件夹；</li>
+<li>指定测试用例目录；</li>
+<li>过滤 <code>keystone</code> 所有 <code>yaml</code> 类型的用例。</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line">mkdir -p keystone/&#123;<span class="built_in">log</span>,html&#125;</span><br><span class="line">rally_task_dir=../../<span class="built_in">source</span>/samples/tasks/scenarios</span><br><span class="line">keystone_case=`find <span class="variable">$rally_task_dir</span>/keystone -name <span class="string">"*.yaml"</span>`</span><br></pre></td></tr></table></figure>
+<h6 id="用例执行及保存"><a href="#用例执行及保存" class="headerlink" title="用例执行及保存"></a>用例执行及保存</h6><p>　　使用 <code>for</code> 循环，执行 keystone 的所有用例并保存结果，</p>
+<ul>
+<li>执行用例并使用用例名称保存对应的 log 文件到相应目录；</li>
+<li>读取每个用例执行结果所生成的 <code>uuid</code>，</li>
+<li>保存每个测试用例的 html 结果。</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> <span class="keyword">case</span> <span class="keyword">in</span> <span class="variable">$keystone_case</span></span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">    <span class="comment">#Create rally log</span></span><br><span class="line">    name=`<span class="built_in">echo</span> <span class="variable">$case</span> | awk -F <span class="string">"/"</span> <span class="string">'&#123;print $NF&#125;'</span> | cut -d <span class="string">"."</span> -f 1`</span><br><span class="line">    rally --<span class="built_in">log</span>-file keystone/<span class="built_in">log</span>/<span class="variable">$name</span>.<span class="built_in">log</span> task start --task <span class="variable">$case</span></span><br><span class="line">    <span class="comment">#Create rally report</span></span><br><span class="line">    uuid=`rally task status | awk <span class="string">'&#123;print $2&#125;'</span> | tr -d :`</span><br><span class="line">    rally task report <span class="variable">$uuid</span> --out keystone/html/<span class="variable">$name</span>.html</span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+<p>　　将用例保存执行即可执行所有 keystone 的用例，其他组件脚本类似，也就是换个名字而已。</p>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>　　这个脚本其实也只是从外部调用 rally 命令去执行任务，简单的实现自动化的过程，比起程序内部的自动化实现还相差甚远。OpenStack 的测试涉及方面太多，还需要自己慢慢深入，业务层面理解后，摸索底层实现方式，加深自己理解。</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>感谢英雄仗义援助<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/alipay.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/wxpay.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -226,7 +344,7 @@ var _hmt = _hmt || [];
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -239,74 +357,96 @@ var _hmt = _hmt || [];
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?data=https://www.ananasyu.top/posts/Rally-Automatic-Script.html" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/posts/Build-Rally-and-Tempest-based-on-Dockerfile.html" class="archive-article-date">
-  	<time datetime="2018-05-18T11:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-18</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/posts/Build-Rally-and-Tempest-based-on-Dockerfile.html">基于 Dockerfile 构建 Rally 和 Tempest 容器镜像</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Dockerfile</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Rally</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Tempest</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Docker/" class="article-tag-list-link color2">Docker</a>
-        		</li>
-      		
-		</ul>
-	</div>
+  
+<nav id="article-nav">
+  
+  
+    <a href="/posts/Build-Rally-and-Tempest-based-on-Dockerfile.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">基于 Dockerfile 构建 Rally 和 Tempest 容器镜像</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        
+    </div>
+</aside>
+
+
+
   
 
-    
+  
+
+  
+
+  
+
+  
 
 
           </div>
@@ -331,9 +471,9 @@ var _hmt = _hmt || [];
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,

@@ -183,6 +183,121 @@ var _hmt = _hmt || [];
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Rally-Automatic-Script" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/posts/Rally-Automatic-Script.html">Rally+Automatic+Script</a>
+    </h1>
+  
+
+        
+          <a href="/posts/Rally-Automatic-Script.html" class="archive-article-date">
+  	<time datetime="2018-05-25T11:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-25</time>
+</a>
+        
+        
+          <div>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <span class="archive-article-date">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+          <span class="post-meta-item-text">  字数统计: </span>
+          <span class="post-count">1,932字</span>
+        </span>
+      </span>
+
+   <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-clock-o"></i>
+          <span class="post-meta-item-text">  阅读时长: </span>
+          <span class="post-count">9分钟</span>
+      </span>
+    </span>
+  </span>
+</div>
+
+        
+        <br>
+      </header>
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a><strong>背景</strong></h2><p>　　Rally 作为测试 OpenStack 性能的主要项目，事实上 Rally 还可以实现云的部署和云产品的功能集成测试。Rally 主要包括一下几个部分：</p>
+<ol>
+<li>Deploy Engine：以类似一个插件形式的东西，和其他部署工具（比如 <code>DevStack</code>，<code>Fuel</code>，<code>Anvil</code> 等）一起工作来简化和统一部署流程。</li>
+<li>Verification：使用 Tempset（OpenStack 社区的接口自动化测试工具）来验证已部署的 OpenStack 云环境的功能性。</li>
+<li>Benchmark Engine：允许在云环境中制造并发负载，并进行性能基准测试。</li>
+<li>Generate report：报表生成器，负责读取rally的测试结果（存储于数据库），生成 html、xml 等格式的报表。</li>
+</ol>
+<p>　　Rally 的测试用例是使用 <code>json</code> 与 <code>yaml</code> 语言编写的，阅读性很高，并且可以将多个用例合并到一个文件里执行。不过 Rally 每次执行 task 的时候都只能指定一个文件，无法批量执行多个任务，而将用例合并也不利于我们细化分析结果，这就阻止了我们自动化的脚步。</p>
+<p>　　如果我们将所需要测试的用例分类整理好，并用脚本遍历每一个文件，将其传输给 Rally 执行测试，那么可以简化我们操作步骤及次数，这也是编写此脚本的目的。而后续将其交给 Jenkins 等 CI 平台自动构建，那么我们能将更多的精力花费去定位及解决问题的层面上，而不是去产生问题哈哈哈~~~</p>
+<p>　　接下来将以 shell 脚本去搜集我们指定目录下的测试文件，并分类整理好以及输出统计数量给我们，最后执行所有用例。</p>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Rally</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Shell</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			
+        		<li class="article-tag-list-item">
+        			<a href="/categories/OpenStack/" class="article-tag-list-link color5">OpenStack</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/posts/Rally-Automatic-Script.html">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Build-Rally-and-Tempest-based-on-Dockerfile" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -494,6 +609,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Tempest</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Shell</a>
               </li>
              
               <li class="article-tag-list-item">
