@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://www.ananasyu.top/posts/Jenkins-DooD.html</loc>
+    
+    <lastmod>2018-06-01T12:09:24.128Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.ananasyu.top/posts/Hello-Hexo.html</loc>
+    
+    <lastmod>2018-05-29T15:44:03.618Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://www.ananasyu.top/posts/Rally-Automatic-Script.html</loc>
     
     <lastmod>2018-05-25T11:31:21.390Z</lastmod>
@@ -12,13 +26,6 @@
     <loc>https://www.ananasyu.top/posts/Build-Rally-and-Tempest-based-on-Dockerfile.html</loc>
     
     <lastmod>2018-05-21T10:43:13.431Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.ananasyu.top/posts/Hello-Hexo.html</loc>
-    
-    <lastmod>2018-05-21T10:39:50.770Z</lastmod>
     
   </url>
   

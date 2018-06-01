@@ -4,6 +4,43 @@
 
     
   <url>
+    <loc>https://www.ananasyu.top/posts/Jenkins-DooD.html</loc>
+    <lastmod>2018-06-01T12:09:24.128Z</lastmod>
+    <data>
+        <display>
+        <title>Jenkins 容器实现 DooD 模式</title>
+        <pubTime>2018-06-01T12:00:00.000Z</pubTime>
+        
+        <tag>Jenkins</tag>
+         
+         
+           
+             
+              <breadCrumb title="Docker" url="https://www.ananasyu.top/categories/Docker/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://www.ananasyu.top/posts/Hello-Hexo.html</loc>
+    <lastmod>2018-05-29T15:44:03.618Z</lastmod>
+    <data>
+        <display>
+        <title>Hello, Hexo !</title>
+        <pubTime>2018-05-10T09:50:30.000Z</pubTime>
+        
+        <tag>essay</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://www.ananasyu.top/posts/Rally-Automatic-Script.html</loc>
     <lastmod>2018-05-25T11:31:21.390Z</lastmod>
     <data>
@@ -44,23 +81,6 @@
              
               <breadCrumb title="Docker" url="https://www.ananasyu.top/categories/Docker/"/>
           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://www.ananasyu.top/posts/Hello-Hexo.html</loc>
-    <lastmod>2018-05-21T10:39:50.770Z</lastmod>
-    <data>
-        <display>
-        <title>Hello, Hexo !</title>
-        <pubTime>2018-05-10T09:50:30.000Z</pubTime>
-        
-        <tag>essay</tag>
-         
-         
-           
         </display>
     </data>
     </url>
