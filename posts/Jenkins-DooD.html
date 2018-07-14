@@ -17,7 +17,7 @@
 <meta property="og:description" content="背景　　Docker 将容器与宿主机隔离开来，虽然保证了一定的安全性，但与前些天发布的 Kata Containers 相比，基于 cgroup 和 namespace 的 Docker 还是存在恶意用户通过”逃离”容器来获取使用宿主机内核的权限和共享容器。而 Kata 试图为每个容器或 pod 提供各自的轻量级虚拟机和微型内核，旨在提供容器的速度，又兼具虚拟机的安全性。借助专用的微型内核，提供了">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://raw.githubusercontent.com/PaulYuuu/BligPicture/master/img/Jenkins-DooD/JenkinsDocker.jpg">
-<meta property="og:updated_time" content="2018-06-01T12:09:24.128Z">
+<meta property="og:updated_time" content="2018-06-05T02:56:34.415Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Jenkins 容器实现 DooD 模式">
 <meta name="twitter:description" content="背景　　Docker 将容器与宿主机隔离开来，虽然保证了一定的安全性，但与前些天发布的 Kata Containers 相比，基于 cgroup 和 namespace 的 Docker 还是存在恶意用户通过”逃离”容器来获取使用宿主机内核的权限和共享容器。而 Kata 试图为每个容器或 pod 提供各自的轻量级虚拟机和微型内核，旨在提供容器的速度，又兼具虚拟机的安全性。借助专用的微型内核，提供了">
@@ -208,7 +208,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
           <span class="post-meta-item-text">  字数统计: </span>
-          <span class="post-count">1,547字</span>
+          <span class="post-count">1,554字</span>
         </span>
       </span>
 
@@ -252,7 +252,7 @@ var _hmt = _hmt || [];
 <p>　　修改 Dockerfile 中的版本</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># jenkins version being bundled in this docker image</span></span><br><span class="line">ARG JENKINS_VERSION</span><br><span class="line">-ENV JENKINS_VERSION <span class="variable">$&#123;JENKINS_VERSION:-2.60.3&#125;</span></span><br><span class="line">+ENV JENKINS_VERSION <span class="variable">$&#123;JENKINS_VERSION:-2.107.3&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># jenkins.war checksum, download will be validated using it</span></span><br><span class="line">-ARG JENKINS_SHA=2d71b8f87c8417f9303a73d52901a59678ee6c0eefcf7325efed6035ff39372a</span><br><span class="line">+ARG JENKINS_SHA=17a9e509bec5b16bde5b50bc7f59d5f1e458a55fe433deb86fd73b865bf89ab8</span><br></pre></td></tr></table></figure>
 <h6 id="构建并启动容器"><a href="#构建并启动容器" class="headerlink" title="构建并启动容器"></a>构建并启动容器</h6><p>　　接下来构建镜像并启动它。其中 <code>-v /var/run/docker.sock:/var/run/docker.sock</code> 与 <code>-v $(which docker):/usr/bin/docker</code> 是实现 DooD 的关键所在。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">$ docker build -t jenkins:2.107.3 .</span><br><span class="line">$ docker images</span><br><span class="line">REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE</span><br><span class="line">jenkins             2.107.3             0a1fd5c91cbc        About a minute ago  706MB</span><br><span class="line">openjdk             8-jdk               d480a7da7735        2 weeks ago         624MB</span><br><span class="line"></span><br><span class="line">$ docker volume create jenkins_home</span><br><span class="line">$ docker run -d \</span><br><span class="line">             -v /var/run/docker.sock:/var/run/docker.sock \</span><br><span class="line">             -v $(<span class="built_in">which</span> docker):/usr/bin/docker \</span><br><span class="line">             -v jenkins_home:/var/jenkins_home \</span><br><span class="line">             --restart=always \</span><br><span class="line">             --hostname jenkins \</span><br><span class="line">             --name jenkins \</span><br><span class="line">             jenkins:2.107.3</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">$ docker build -t jenkins:2.107.3 .</span><br><span class="line">$ docker images</span><br><span class="line">REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE</span><br><span class="line">jenkins             2.107.3             0a1fd5c91cbc        About a minute ago  706MB</span><br><span class="line">openjdk             8-jdk               d480a7da7735        2 weeks ago         624MB</span><br><span class="line"></span><br><span class="line">$ docker volume create jenkins_home</span><br><span class="line">$ docker run -d \</span><br><span class="line">             -p 8080:8080 -p 50000:50000 \</span><br><span class="line">             -v /var/run/docker.sock:/var/run/docker.sock \</span><br><span class="line">             -v $(<span class="built_in">which</span> docker):/usr/bin/docker \</span><br><span class="line">             -v jenkins_home:/var/jenkins_home \</span><br><span class="line">             --restart=always \</span><br><span class="line">             --hostname jenkins \</span><br><span class="line">             --name jenkins \</span><br><span class="line">             jenkins:2.107.3</span><br></pre></td></tr></table></figure>
 <h6 id="验证-docker-命令"><a href="#验证-docker-命令" class="headerlink" title="验证 docker 命令"></a>验证 docker 命令</h6><p>　　进入 jenkins 容器，验证是否能正常使用 docker 命令。由于没有将 jenkins 用户加入 docker 组，所以此时需要使用 sudo 提权。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">jenkins@jenkins:/$ sudo docker images</span><br><span class="line">REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE</span><br><span class="line">tempest             18.0.0              989dd894dc00        2 days ago          927MB</span><br><span class="line">rally               0.12.1              3512077847b0        2 days ago          817MB</span><br><span class="line">jenkins             2.107.3             0a1fd5c91cbc        2 days ago          706MB</span><br><span class="line">openjdk             8-jdk               d480a7da7735        2 weeks ago         624MB</span><br><span class="line">ubuntu              16.04               0b1edfbffd27        4 weeks ago         113MB</span><br></pre></td></tr></table></figure>
 <p>　　接下来就可以在 Jenkins 的 web 界面构建 job，然后构建步骤选择 shell 就可以调用 docker 命令进行测试及验证，或者通过其他 docker 的插件进行打包等，这里就不做过多描述。</p>
@@ -383,6 +383,15 @@ var _hmt = _hmt || [];
 
   
 <nav id="article-nav">
+  
+    <a href="/posts/Comeback.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          我回来了！
+        
+      </div>
+    </a>
   
   
     <a href="/posts/Rally-Automatic-Script.html" id="article-nav-older" class="article-nav-link-wrap">
@@ -517,11 +526,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Jenkins</a>
+                <a href="javascript:void(0)" class="js-tag color1">Shell</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Shell</a>
+                <a href="javascript:void(0)" class="js-tag color3">Jenkins</a>
               </li>
             
             <div class="clearfix"></div>
@@ -572,7 +581,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
     
     	<section class="tools-section tools-section-me" q-show="aboutme">
   	  	
-  	  		<div class="aboutme-wrap" id="js-aboutme">余益煌&lt;br&gt;杂食性测试工程师一枚&lt;br&gt;　&lt;br&gt;技术广深度浅&lt;br&gt;OpenStack测试及Docker打交道中&lt;br&gt;　&lt;br&gt;爱好：唱歌、数码、轮滑等</div>
+  	  		<div class="aboutme-wrap" id="js-aboutme">余益煌&lt;br&gt;杂食性测试工程师一枚&lt;br&gt;　&lt;br&gt;希望拥抱云端&lt;br&gt;目前朝着KVM进军中&lt;br&gt;　&lt;br&gt;爱好：唱歌、数码、轮滑等</div>
   	  	
     	</section>
     
