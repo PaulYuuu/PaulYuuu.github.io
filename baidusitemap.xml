@@ -3,6 +3,7 @@
 
 
     
+    
   <url>
     <loc>https://www.ananasyu.top/posts/Comeback.html</loc>
     <lastmod>2018-07-14T15:49:16.437Z</lastmod>
@@ -45,9 +46,9 @@
         <title>基于 Dockerfile 构建 Rally 和 Tempest 容器镜像</title>
         <pubTime>2018-05-18T11:00:00.000Z</pubTime>
         
-        <tag>Dockerfile</tag>
-         
         <tag>Rally</tag>
+         
+        <tag>Dockerfile</tag>
          
         <tag>Tempest</tag>
          
@@ -102,7 +103,6 @@
     </data>
     </url>
 
-    
     
     
     

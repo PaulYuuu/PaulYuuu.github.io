@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://www.ananasyu.top/photos/data.json</loc>
+    
+    <lastmod>2018-10-14T09:38:55.475Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://www.ananasyu.top/posts/Comeback.html</loc>
     
     <lastmod>2018-07-14T15:49:16.437Z</lastmod>
@@ -47,13 +54,6 @@
     <loc>https://www.ananasyu.top/photos/index.html</loc>
     
     <lastmod>2018-05-15T09:57:30.885Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.ananasyu.top/photos/data.json</loc>
-    
-    <lastmod>2018-05-14T09:35:31.288Z</lastmod>
     
   </url>
   
